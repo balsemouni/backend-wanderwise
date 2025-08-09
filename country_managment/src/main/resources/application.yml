@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: country-management
+  config:
+    import: "optional:configserver:http://localhost:8888"
+  cloud:
+    config:
+      enabled: false
+      import-check:
+        enabled: false
+  datasource:
+    url: jdbc:postgresql://localhost:5432/country_management_db
+    username: postgres
+    password: balsem0404
+    driver-class-name: org.postgresql.Driver
+  sql:
+    init:
+      mode: always
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  data:
+    jpa:
+      repositories:
+        enabled: true
+
+server:
+  port: 8082
+
+logging:
+  level:
+    org:
+      springframework: DEBUG

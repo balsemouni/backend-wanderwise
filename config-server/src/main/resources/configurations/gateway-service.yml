@@ -1,0 +1,35 @@
+server:
+  port: 8222
+
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: student-service
+          uri: lb://STUDENT-SERVICE
+          predicates:
+            - Path=/api/v1/students/**
+        - id: notes-service
+          uri: lb://NOTES-SERVICE
+          predicates:
+            - Path=/api/v1/notes/**
+        - id: country-management
+          uri: lb://country-management
+          predicates:
+            - Path=/api/countries/**,/api/activities/**,/api/historiques/**
+        - id: quiz-management
+          uri: http://localhost:8052
+          predicates:
+            - Path=/api/quizzes/**,/api/answers/**
+        - id: review-service
+          uri: http://localhost:8097
+          predicates:
+            - Path=/api/reviews/**
+        - id: review-service
+          uri: http://localhost:8101
+          predicates:
+            - Path=/users/**

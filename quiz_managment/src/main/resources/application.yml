@@ -1,0 +1,53 @@
+
+#  security:
+#    oauth2:
+#      resourceserver:
+#        jwt:
+#          issuer-uri: http://localhost:8081/realms/WiseWander_v1.1
+#          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
+
+#jwt:
+#  auth:
+#    converter:
+#      resource-id: my_app_client
+#      principle-attribute: preferred_username
+spring:
+  application:
+    name: quiz-management
+  config:
+    import: "optional:configserver:http://localhost:8888"
+  cloud:
+    discovery:
+      enabled: true
+    config:
+      enabled: false
+      import-check:
+        enabled: false
+  datasource:
+    url: jdbc:postgresql://localhost:5432/quiz
+    username: postgres
+    password: balsem0404
+    driver-class-name: org.postgresql.Driver
+  sql:
+    init:
+      mode: always
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  data:
+    jpa:
+      repositories:
+        enabled: true
+
+server:
+  port: 8052
+
+logging:
+  level:
+    org:
+      springframework: DEBUG

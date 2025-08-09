@@ -1,0 +1,50 @@
+
+spring:
+  application:
+    name: user-service
+  config:
+    import: "optional:configserver:http://localhost:8888"
+  cloud:
+    discovery:
+      enabled: true
+    config:
+      enabled: false
+      import-check:
+        enabled: false
+  datasource:
+    url: jdbc:postgresql://localhost:5432/keycloak_user
+    username: postgres
+    password: balsem0404
+    driver-class-name: org.postgresql.Driver
+  sql:
+    init:
+      mode: always
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  data:
+    jpa:
+      repositories:
+        enabled: true
+
+server:
+  port: 8101
+
+logging:
+  level:
+    org:
+      springframework: DEBUG
+
+app:
+  keycloak:
+    admin:
+      clientId: my_app_client
+      clientSecret: kFlPc85lEGJbHp16VZqsY8jW3ne2pmoH
+    realm: WiseWander_v1.1
+    serverUrl: http://localhost:8081
+
